@@ -1,0 +1,31 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-and-test:
+    name: Check & Test
+    runs-on: ubuntu-latest
+    if: |
+      !startsWith(github.event.head_commit.message, 'chore: release')
+    steps:
+      - name: Setup Bun
+        uses: kevinmarrec/workflows/setup-bun@e75e813f841540f3b115417ea084d11933c3a10a # main
+
+      - name: Check unused files, dependencies, and exports
+        run: bun run knip
+
+      - name: Lint
+        run: bun run lint
+
+      - name: Type check
+        run: bun run typecheck
+
+      - name: Unit tests
+        run: bun run test:coverage

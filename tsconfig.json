@@ -1,0 +1,7 @@
+{
+  "extends": "@kevinmarrec/tsconfig",
+  "exclude": [
+    "**/coverage/**",
+    "**/dist/**"
+  ]
+}

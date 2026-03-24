@@ -1,0 +1,18 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  release:
+    name: Release
+    uses: kevinmarrec/workflows/.github/workflows/release.yml@e75e813f841540f3b115417ea084d11933c3a10a # main
+    with:
+      publish: true
+      workflow-cleanup: ci.yml
+    permissions:
+      actions: write
+      contents: write
+      id-token: write

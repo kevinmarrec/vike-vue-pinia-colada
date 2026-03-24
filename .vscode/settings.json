@@ -1,0 +1,50 @@
+{
+  // TypeScript
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "js/ts.format.semicolons": "remove",
+  "js/ts.preferences.quoteStyle": "single",
+
+  // Editor
+  "editor.formatOnSave": false,
+  "editor.gotoLocation.multipleDefinitions": "gotoAndPeek",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit",
+    "source.organizeImports": "never"
+  },
+
+  // ESLint
+  "eslint.validate": [
+    "github-actions-workflow",
+    "javascript",
+    "typescript",
+    "markdown",
+    "json",
+    "jsonc",
+    "yaml"
+  ],
+
+  // Silence stylistic rules in the IDE, but still auto fix them
+  "eslint.rules.customizations": [
+    { "rule": "style/*", "severity": "off" },
+    { "rule": "*-indent", "severity": "off" },
+    { "rule": "*-spacing", "severity": "off" },
+    { "rule": "*-spaces", "severity": "off" },
+    { "rule": "*-order", "severity": "off" },
+    { "rule": "*-dangle", "severity": "off" },
+    { "rule": "*-newline", "severity": "off" },
+    { "rule": "*quotes", "severity": "off" },
+    { "rule": "*semi", "severity": "off" }
+  ],
+
+  // Prettier (disabled)
+  "prettier.enable": false,
+
+  // JSON schemas
+  "json.schemas": [
+    {
+      "fileMatch": ["renovate.json"],
+      "url": "https://docs.renovatebot.com/renovate-schema.json"
+    }
+  ]
+}

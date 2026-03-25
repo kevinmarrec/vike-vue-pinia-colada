@@ -7,8 +7,6 @@ import type { Config } from 'vike/types'
 export default {
   name: 'vike-vue-pinia-colada',
   require: {
-    '@pinia/colada': '>=1.0.0',
-    'pinia': '>=3.0.0',
     'vike': '>=0.4.255',
     'vike-vue': '>=0.9.0',
   },

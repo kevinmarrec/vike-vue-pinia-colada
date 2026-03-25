@@ -26,6 +26,12 @@ Built on top of the same patterns as [`vike-vue-pinia`](https://github.com/vikej
    }
    ```
 
+## Why a separate extension?
+
+Pinia Colada stores its query cache inside Pinia, but serializing it through Pinia's standard state hydration doesn't work reliably — cache keys can be functions, which aren't serializable out of the box. This causes issues when relying solely on `vike-vue-pinia` for SSR.
+
+The recommended approach is to use the dedicated helpers provided by Pinia Colada ([`serializeQueryCache`](https://pinia-colada.esm.dev/guide/ssr.html) / `reviveQueryCache`) to correctly serialize the query cache on the server and hydrate it on the client. This is exactly what this extension does under the hood.
+
 ## See also
 
 - [Pinia Colada](https://pinia-colada.esm.dev)

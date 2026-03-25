@@ -18,6 +18,7 @@ function createPageContext(overrides: Record<string, unknown> = {}) {
   return {
     isClientSide: false,
     app: { use: vi.fn() },
+    config: {},
     globalContext: {},
     pinia: createMockPinia(),
     ...overrides,
@@ -43,7 +44,18 @@ describe('onCreateApp', () => {
     onCreateApp(pageContext)
 
     expect(pageContext.app!.use).toHaveBeenCalledWith(pageContext.pinia)
-    expect(pageContext.app!.use).toHaveBeenCalledWith(PiniaColada)
+    expect(pageContext.app!.use).toHaveBeenCalledWith(PiniaColada, undefined)
+  })
+
+  it('passes piniaColadaOptions to PiniaColada plugin', () => {
+    const piniaColadaOptions = { queryOptions: { staleTime: 5000 } }
+    const pageContext = createPageContext({
+      config: { piniaColadaOptions },
+    })
+
+    onCreateApp(pageContext)
+
+    expect(pageContext.app!.use).toHaveBeenCalledWith(PiniaColada, piniaColadaOptions)
   })
 
   it('prefers globalContext.pinia over pageContext.pinia', () => {

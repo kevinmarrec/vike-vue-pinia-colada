@@ -13,5 +13,5 @@ export function onCreateApp(pageContext: PageContext) {
   }
 
   pageContext.app.use(pinia)
-  pageContext.app.use(PiniaColada)
+  pageContext.app.use(PiniaColada, pageContext.config.piniaColadaOptions)
 }

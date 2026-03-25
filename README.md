@@ -26,6 +26,24 @@ Built on top of the same patterns as [`vike-vue-pinia`](https://github.com/vikej
    }
    ```
 
+## Pinia Colada Options
+
+You can pass options to the Pinia Colada plugin via the `piniaColadaOptions` config:
+
+```js
+// pages/+config.js
+
+export default {
+  piniaColadaOptions: {
+    queryOptions: {
+      staleTime: 5000,
+    },
+  }
+}
+```
+
+All options from [`PiniaColadaOptions`](https://pinia-colada.esm.dev/guide/installation.html) are supported.
+
 ## Why a separate extension?
 
 Pinia Colada stores its query cache inside Pinia, but serializing it through Pinia's standard state hydration doesn't work reliably — cache keys can be functions, which aren't serializable out of the box. This causes issues when relying solely on `vike-vue-pinia` for SSR.

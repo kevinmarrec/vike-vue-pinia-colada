@@ -5,13 +5,17 @@ export function onCreateApp(pageContext: PageContext) {
   if (!pageContext.app) return
 
   const pinia = pageContext.globalContext.pinia ?? pageContext.pinia!
+  const { app, config, isClientSide, _piniaInitialState, _piniaColadaCache } = pageContext
 
-  if (pageContext.isClientSide) {
-    const { _piniaInitialState, _piniaColadaCache } = pageContext
-    if (_piniaInitialState) pinia.state.value = _piniaInitialState
-    if (_piniaColadaCache) hydrateQueryCache(useQueryCache(pinia), _piniaColadaCache)
+  if (isClientSide && _piniaInitialState) {
+    pinia.state.value = _piniaInitialState
   }
 
-  pageContext.app.use(pinia)
-  pageContext.app.use(PiniaColada, pageContext.config.piniaColadaOptions)
+  app.use(pinia)
+
+  if (isClientSide && _piniaColadaCache) {
+    hydrateQueryCache(useQueryCache(pinia), _piniaColadaCache)
+  }
+
+  app.use(PiniaColada, config.piniaColadaOptions)
 }

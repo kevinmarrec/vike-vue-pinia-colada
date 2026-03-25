@@ -98,6 +98,34 @@ describe('onCreateApp', () => {
     expect(hydrateQueryCache).toHaveBeenCalledWith('mockQueryCache', cache)
   })
 
+  it('installs pinia before hydrating colada cache on client', () => {
+    const callOrder: string[] = []
+    const pinia = createMockPinia()
+    const cache = { todos: { data: [1, 2, 3] } }
+    const pageContext = createPageContext({
+      isClientSide: true,
+      pinia: pinia as unknown as PageContext['pinia'],
+      _piniaColadaCache: cache as unknown as PageContext['_piniaColadaCache'],
+    })
+
+    vi.mocked(pageContext.app!.use).mockImplementation((...args: unknown[]) => {
+      if (args[0] === pinia) callOrder.push('app.use(pinia)')
+      if (args[0] === PiniaColada) callOrder.push('app.use(PiniaColada)')
+      return pageContext.app!
+    })
+    vi.mocked(hydrateQueryCache).mockImplementation(() => {
+      callOrder.push('hydrateQueryCache')
+    })
+
+    onCreateApp(pageContext)
+
+    expect(callOrder).toEqual([
+      'app.use(pinia)',
+      'hydrateQueryCache',
+      'app.use(PiniaColada)',
+    ])
+  })
+
   it('does not hydrate on server', () => {
     const pageContext = createPageContext({
       isClientSide: false,

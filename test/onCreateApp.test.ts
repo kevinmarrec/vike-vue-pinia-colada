@@ -38,6 +38,15 @@ describe('onCreateApp', () => {
     expect(vi.mocked(hydrateQueryCache)).not.toHaveBeenCalled()
   })
 
+  it('returns early when rendering head', () => {
+    const pageContext = createPageContext({ isRenderingHead: true })
+
+    onCreateApp(pageContext)
+
+    expect(pageContext.app!.use).not.toHaveBeenCalled()
+    expect(vi.mocked(hydrateQueryCache)).not.toHaveBeenCalled()
+  })
+
   it('installs pinia and PiniaColada on the app', () => {
     const pageContext = createPageContext()
 

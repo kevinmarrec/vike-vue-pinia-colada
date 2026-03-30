@@ -1,8 +1,19 @@
-[![npm version](https://img.shields.io/npm/v/vike-vue-pinia-colada)](https://www.npmjs.com/package/vike-vue-pinia-colada)
+<p align="center">
+  <img height="240" src="./.github/logo.png" alt="vike-vue-pinia-colada">
+</p>
 
-# `vike-vue-pinia-colada`
+<h1 align="center">vike-vue-pinia-colada</h1>
 
-[Pinia Colada](https://pinia-colada.esm.dev) integration for [`vike-vue`](https://vike.dev/vike-vue) with SSR support.
+<p align="center">
+  <a href="https://www.npmjs.com/package/vike-vue-pinia-colada"><img src="https://img.shields.io/npm/v/vike-vue-pinia-colada" alt="npm version"></a>
+  <a href="https://www.npmjs.com/package/vike-vue-pinia-colada"><img src="https://img.shields.io/npm/dm/vike-vue-pinia-colada" alt="npm downloads"></a>
+  <a href="https://github.com/kevinmarrec/vike-vue-pinia-colada/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/kevinmarrec/vike-vue-pinia-colada/ci.yml?label=ci" alt="CI"></a>
+  <a href="https://github.com/kevinmarrec/vike-vue-pinia-colada/blob/main/LICENSE"><img src="https://img.shields.io/github/license/kevinmarrec/vike-vue-pinia-colada" alt="license"></a>
+  <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-blue?logo=typescript&logoColor=white" alt="TypeScript"></a>
+</p>
+
+<p align="center">
+  <a href="https://pinia-colada.esm.dev">Pinia Colada</a> integration for <a href="https://vike.dev/vike-vue">vike-vue</a> with SSR support.</p>
 
 Built on top of the same patterns as [`vike-vue-pinia`](https://github.com/vikejs/vike-vue/tree/main/packages/vike-vue-pinia), with added Pinia Colada query cache serialization/hydration.
 

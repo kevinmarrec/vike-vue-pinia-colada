@@ -25,10 +25,18 @@
   },
   "typesVersions": {
     "*": {
-      "config": ["./dist/_config.d.mts"],
-      "__internal/integration/onCreateApp": ["./dist/integration/_onCreateApp.d.mts"],
-      "__internal/integration/onAfterRenderHtml": ["./dist/integration/_onAfterRenderHtml.d.mts"],
-      "__internal/integration/onCreatePageContext": ["./dist/integration/_onCreatePageContext.d.mts"]
+      "config": [
+        "./dist/_config.d.mts"
+      ],
+      "__internal/integration/onCreateApp": [
+        "./dist/integration/_onCreateApp.d.mts"
+      ],
+      "__internal/integration/onAfterRenderHtml": [
+        "./dist/integration/_onAfterRenderHtml.d.mts"
+      ],
+      "__internal/integration/onCreatePageContext": [
+        "./dist/integration/_onCreatePageContext.d.mts"
+      ]
     }
   },
   "files": [
@@ -58,8 +66,8 @@
     "@vitest/coverage-v8": "^4.1.2",
     "bumpp": "^11.0.1",
     "eslint": "^10.1.0",
-    "knip": "^6.0.6",
-    "tsdown": "^0.21.6",
+    "knip": "^6.1.0",
+    "tsdown": "^0.21.7",
     "typescript": "^5.9.3",
     "vitest": "^4.1.2"
   }

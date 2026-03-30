@@ -50,6 +50,21 @@ Pinia Colada stores its query cache inside Pinia, but serializing it through Pin
 
 The recommended approach is to use the dedicated helpers provided by Pinia Colada ([`serializeQueryCache`](https://pinia-colada.esm.dev/guide/ssr.html) / `reviveQueryCache`) to correctly serialize the query cache on the server and hydrate it on the client. This is exactly what this extension does under the hood.
 
+## Architecture differences with `vike-vue-pinia`
+
+This extension differs from `vike-vue-pinia` in how Pinia is initialized:
+
+- **`vike-vue-pinia`** uses `+onCreatePageContext.ssr.ts` for server-side Pinia creation, then creates the client-side instance separately in `+onCreateApp.ts` via a shared `createPiniaPlus` helper.
+- **`vike-vue-pinia-colada`** uses a single `+onCreatePageContext.ts` (no `.ssr` suffix) that handles both environments. On the client, it early-returns if a Pinia instance already exists on `globalContext`.
+
+Both approaches avoid unnecessary `pageContext.json` requests during client-side navigation:
+
+- `.ssr.js` hooks only run during SSR (initial server render), not during client-side navigation.
+- No-suffix hooks run on both server and client — during client-side navigation, they execute client-side, so no server round-trip is needed.
+- Only `.server.js` hooks would trigger `pageContext.json` requests during client-side navigation.
+
+The result is a simpler implementation: one hook handles Pinia creation in both environments, while `+onCreateApp` focuses solely on app plugin installation and hydration. The trade-off is a negligible extra `onCreatePageContext` call on each client-side navigation (which immediately early-returns).
+
 ## See also
 
 - [Pinia Colada](https://pinia-colada.esm.dev)

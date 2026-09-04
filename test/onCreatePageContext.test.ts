@@ -1,6 +1,6 @@
 import { createPinia } from 'pinia'
 import type { PageContext } from 'vike/types'
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import { onCreatePageContext } from '../src/integration/+onCreatePageContext'
 
@@ -18,10 +18,6 @@ function createPageContext(overrides: Record<string, unknown> = {}) {
 }
 
 describe('onCreatePageContext', () => {
-  beforeEach(() => {
-    vi.clearAllMocks()
-  })
-
   it('creates pinia on pageContext for server', async () => {
     const pageContext = createPageContext()
 

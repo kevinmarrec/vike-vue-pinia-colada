@@ -1,6 +1,6 @@
 import { serializeQueryCache, useQueryCache } from '@pinia/colada'
 import type { PageContextServer } from 'vike/types'
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import { onAfterRenderHtml } from '../src/integration/+onAfterRenderHtml'
 
@@ -25,10 +25,6 @@ function createPageContext(overrides: Record<string, unknown> = {}) {
 }
 
 describe('onAfterRenderHtml', () => {
-  beforeEach(() => {
-    vi.clearAllMocks()
-  })
-
   it('returns early if pinia is not available', () => {
     const pageContext = createPageContext({ pinia: undefined })
 

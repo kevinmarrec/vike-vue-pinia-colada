@@ -1,6 +1,6 @@
 import { hydrateQueryCache, PiniaColada, useQueryCache } from '@pinia/colada'
 import type { PageContext } from 'vike/types'
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import { onCreateApp } from '../src/integration/+onCreateApp'
 
@@ -26,10 +26,6 @@ function createPageContext(overrides: Record<string, unknown> = {}) {
 }
 
 describe('onCreateApp', () => {
-  beforeEach(() => {
-    vi.clearAllMocks()
-  })
-
   it('returns early if app is not available', () => {
     const pageContext = createPageContext({ app: undefined as unknown as PageContext['app'] })
 

@@ -5,7 +5,11 @@ import { describe, expect, it, vi } from 'vitest'
 import { onAfterRenderHtml } from '../src/integration/+onAfterRenderHtml'
 
 vi.mock('@pinia/colada', () => ({
-  serializeQueryCache: vi.fn(() => ({ todos: { data: [1, 2, 3] } })),
+  serializeQueryCache: vi.fn(() => ({
+    todos: {
+      data: [1, 2, 3],
+    },
+  })),
   useQueryCache: vi.fn(() => 'mockQueryCache'),
 }))
 
@@ -42,7 +46,11 @@ describe('onAfterRenderHtml', () => {
 
     expect(useQueryCache).toHaveBeenCalledWith(pageContext.pinia)
     expect(serializeQueryCache).toHaveBeenCalledWith('mockQueryCache')
-    expect(pageContext._piniaColadaCache).toEqual({ todos: { data: [1, 2, 3] } })
+    expect(pageContext._piniaColadaCache).toEqual({
+      todos: {
+        data: [1, 2, 3],
+      },
+    })
   })
 
   it('removes colada stores from pinia state', () => {
@@ -59,6 +67,8 @@ describe('onAfterRenderHtml', () => {
 
     onAfterRenderHtml(pageContext)
 
-    expect(pageContext._piniaInitialState).toEqual({ counter: { count: 1 } })
+    expect(pageContext._piniaInitialState).toEqual({
+      counter: { count: 1 },
+    })
   })
 })

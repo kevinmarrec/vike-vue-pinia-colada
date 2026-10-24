@@ -5,7 +5,10 @@ import { describe, expect, it, vi } from 'vitest'
 import { onCreatePageContext } from '../src/integration/+onCreatePageContext'
 
 vi.mock('pinia', () => ({
-  createPinia: vi.fn(() => ({ state: { value: {} }, use: vi.fn() })),
+  createPinia: vi.fn(() => ({
+    state: { value: {} },
+    use: vi.fn(),
+  })),
 }))
 
 function createPageContext(overrides: Record<string, unknown> = {}) {
@@ -38,7 +41,9 @@ describe('onCreatePageContext', () => {
   })
 
   it('skips creation if globalContext.pinia already exists on client', async () => {
-    const existingPinia = { state: { value: {} } }
+    const existingPinia = {
+      state: { value: {} },
+    }
     const pageContext = createPageContext({
       isClientSide: true,
       globalContext: { pinia: existingPinia },
@@ -54,7 +59,9 @@ describe('onCreatePageContext', () => {
     const hook1 = vi.fn()
     const hook2 = vi.fn()
     const pageContext = createPageContext({
-      config: { onCreatePinia: [hook1, hook2] } as PageContext['config'],
+      config: {
+        onCreatePinia: [hook1, hook2],
+      } as PageContext['config'],
     })
 
     await onCreatePageContext(pageContext)

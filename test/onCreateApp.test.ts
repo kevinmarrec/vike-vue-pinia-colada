@@ -6,18 +6,25 @@ import { onCreateApp } from '../src/integration/+onCreateApp'
 
 vi.mock('@pinia/colada', () => ({
   hydrateQueryCache: vi.fn(),
-  PiniaColada: { install: vi.fn() },
+  PiniaColada: {
+    install: vi.fn(),
+  },
   useQueryCache: vi.fn(() => 'mockQueryCache'),
 }))
 
 function createMockPinia() {
-  return { state: { value: {} }, use: vi.fn() }
+  return {
+    state: { value: {} },
+    use: vi.fn(),
+  }
 }
 
 function createPageContext(overrides: Record<string, unknown> = {}) {
   return {
     isClientSide: false,
-    app: { use: vi.fn() },
+    app: {
+      use: vi.fn(),
+    },
     config: {},
     globalContext: {},
     pinia: createMockPinia(),
@@ -53,7 +60,9 @@ describe('onCreateApp', () => {
   })
 
   it('passes piniaColadaOptions to PiniaColada plugin', () => {
-    const piniaColadaOptions = { queryOptions: { staleTime: 5000 } }
+    const piniaColadaOptions = {
+      queryOptions: { staleTime: 5000 },
+    }
     const pageContext = createPageContext({
       config: { piniaColadaOptions },
     })
@@ -76,7 +85,9 @@ describe('onCreateApp', () => {
 
   it('hydrates pinia state on client', () => {
     const pinia = createMockPinia()
-    const initialState = { counter: { count: 42 } }
+    const initialState = {
+      counter: { count: 42 },
+    }
     const pageContext = createPageContext({
       isClientSide: true,
       pinia: pinia as unknown as PageContext['pinia'],
@@ -90,7 +101,11 @@ describe('onCreateApp', () => {
 
   it('hydrates colada cache on client', () => {
     const pinia = createMockPinia()
-    const cache = { todos: { data: [1, 2, 3] } }
+    const cache = {
+      todos: {
+        data: [1, 2, 3],
+      },
+    }
     const pageContext = createPageContext({
       isClientSide: true,
       pinia: pinia as unknown as PageContext['pinia'],
@@ -106,7 +121,11 @@ describe('onCreateApp', () => {
   it('installs pinia before hydrating colada cache on client', () => {
     const callOrder: string[] = []
     const pinia = createMockPinia()
-    const cache = { todos: { data: [1, 2, 3] } }
+    const cache = {
+      todos: {
+        data: [1, 2, 3],
+      },
+    }
     const pageContext = createPageContext({
       isClientSide: true,
       pinia: pinia as unknown as PageContext['pinia'],
@@ -134,7 +153,9 @@ describe('onCreateApp', () => {
   it('does not hydrate on server', () => {
     const pageContext = createPageContext({
       isClientSide: false,
-      _piniaInitialState: { counter: { count: 1 } },
+      _piniaInitialState: {
+        counter: { count: 1 },
+      },
       _piniaColadaCache: {} as PageContext['_piniaColadaCache'],
     })
 

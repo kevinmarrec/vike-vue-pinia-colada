@@ -65,9 +65,9 @@
     "@types/bun": "^1.4.4",
     "@vitest/coverage-v8": "^5.0.5",
     "bumpp": "^12.3.0",
-    "eslint": "^10.13.0",
-    "knip": "^6.43.0",
-    "tsdown": "^0.23.2",
+    "eslint": "^10.14.0",
+    "knip": "^6.44.0",
+    "tsdown": "^0.23.4",
     "typescript": "^6.0.3",
     "vitest": "^5.0.5"
   }
